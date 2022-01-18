@@ -146,6 +146,7 @@ function handleMouseLeave() {
 function handleDelButtonClick() {
     points = [];
     draw();
+    document.getElementById('result').innerHTML = "";
 }
 
 // アプリケーションを開始します.

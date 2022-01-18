@@ -18,6 +18,17 @@ git clone https://github.com/yoheimune-python-lecture/hand-written-digit-recogni
 # ダウンロードしたフォルダへ移動.
 cd hand-written-digit-recognition
 ```
+## 仮想環境の作成と起動 
+- pyenv設定
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+pyenv global 3.8.0
+python --version
+- 作成
+python -m venv demo
+source demo/bin/activate
 ## 必要ライブラリのインストール
 利用するライブラリを `pip`でインストールします.
 ```
@@ -31,7 +42,7 @@ pip3 install --upgrade scikit-learn
 まずは起動してみて動くことを確認します.
 ```
 cd practice
-python3 app.py
+python3 practice/app.py
 ```
 以下のURLでアクセス可能です。
 ```

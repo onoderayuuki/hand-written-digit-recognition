@@ -35,8 +35,13 @@ def api_judge():
         頑張ってください！
     """
 
-    # ダミー
-    return "-1"
+    import joblib
+    pklfile = "./result/svm.pkl"
+    clf = joblib.load(pklfile)
+
+    predict = clf.predict([data])
+    number = str(predict.tolist()[0])
+    return number
 
 if __name__ == "__main__":
     app.run(debug=True, port=5002)

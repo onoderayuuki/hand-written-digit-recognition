@@ -27,3 +27,39 @@ if __name__ == "__main__":
         ここが一番大変なところです。
         ぜひぜひ頑張ってください！！
     """
+#%%
+from sklearn import svm
+from sklearn import metrics
+
+# training
+#%%
+with open("./csv/train-images.csv") as f:
+    images = f.read().split("\n")[:10000]
+with open("./csv/train-labels.csv") as f:
+    labels = f.read().split("\n")[:10000]
+images = [[int(i)/256 for i in image.split(",")]for image in images]
+labels = [int(l) for l in labels]
+#%%
+clf = svm.SVC()
+clf.fit(images,labels)
+
+# test
+#%%
+with open("./csv/test-images.csv") as f:
+    images_test = f.read().split("\n")[:500]
+with open("./csv/test-labels.csv") as f:
+    labels_test = f.read().split("\n")[:500]
+
+images_test = [[int(i)/256 for i in image.split(",")]for image in images_test]
+labels_test = [int(l) for l in labels_test]
+#%%
+predict = clf.predict(images_test)
+ac_score = metrics.accuracy_score(labels_test,predict)
+print("Accuracy:",ac_score)
+cl_report = metrics.classification_report(labels_test,predict)
+print(cl_report)
+# %%
+# export model
+import joblib
+joblib.dump(clf, "./result/svm.pkl")
+# %%

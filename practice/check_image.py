@@ -11,7 +11,7 @@ if __name__ == "__main__":
     if not os.path.exists("image"):
         os.mkdir("image")
 
-    with open(os.path.join("csv", "training_image.csv")) as f:
+    with open(os.path.join("csv", "train-images.csv")) as f:
         images = f.read().split("\n")
 
     for i, image in enumerate(images[:CNT]):

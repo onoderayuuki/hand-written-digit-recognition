@@ -18,3 +18,30 @@ if __name__ == "__main__":
         作成が完了したら、同ディレクトリにある`check_image.py`を実行し、
         画像が正しく出力されるかを確認してください。
     """
+import struct
+import gzip
+
+# label
+fpath = "./mnist/train-labels-idx1-ubyte.gz"
+with gzip.open(fpath,"rb") as f:
+    magic_number,img_count = struct.unpack(">II",f.read(8))
+    labels = []
+    for i in range(img_count):
+        label = str(struct.unpack("B",f.read(1))[0])
+        labels.append(label)
+outpath = './csv/train-labels.csv'
+with open(outpath,"w") as f:
+    f.write("\n".join(labels))
+
+#image
+fpath2 = "./mnist/train-images-idx3-ubyte.gz"
+with gzip.open(fpath2,"rb") as f:
+    _,img_count = struct.unpack(">II",f.read(8))
+    rows,cols = struct.unpack(">II",f.read(8))
+    images = []
+    for i in range(img_count):
+        binary = f.read(rows * cols)
+        images.append(",".join([str(b) for b in binary]))
+outpath2 = './csv/train-images.csv'
+with open(outpath2,"w") as f:
+    f.write("\n".join(images))

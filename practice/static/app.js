@@ -128,9 +128,9 @@ function handleMouseMove(e) {
  * マウスアップのイベントを扱います.
  */
 function handleMouseUp() {
-    draw();
+    // draw();
     drawing = false;
-    judge();
+    // judge();
 }
 
 /**
@@ -149,6 +149,12 @@ function handleDelButtonClick() {
     document.getElementById('result').innerHTML = "";
 }
 
+/*判定ボタン追加！*/
+function handleGoButtonClick() {
+    judge();
+    
+}
+
 // アプリケーションを開始します.
 window.addEventListener('DOMContentLoaded', () => {
 
@@ -161,4 +167,5 @@ window.addEventListener('DOMContentLoaded', () => {
     canvas.onmouseleave = handleMouseLeave;
 
     document.getElementById('delButton').onclick = handleDelButtonClick;
+    document.getElementById('goButton').onclick = handleGoButtonClick;
 });
